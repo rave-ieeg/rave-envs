@@ -21,7 +21,10 @@ RUN chmod 0777 /home/shiny/setup_rave.sh && \
 COPY ./docker/server-files /home/shiny/server-files
 RUN cp -f /home/shiny/server-files/shiny-server.conf /etc/shiny-server/shiny-server.conf && \ 
     chown -R shiny /home/shiny/server-files && \ 
-    chmod -R 0755 /home/shiny/server-files
+    chmod -R 0755 /home/shiny/server-files && \ 
+    rm -rf /tmp/* && \ 
+    rm -rf /data/rave_data/raw_dir/DemoSubject && \ 
+    rm -rf /data/rave_data/data_dir/demo
 
 USER shiny
 

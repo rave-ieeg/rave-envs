@@ -9,7 +9,7 @@ cd "$SCRIPT_DIR"
 # Build the rave_shiny-verse Dockerfile in the Docker directory and name the image as rave-ieeg/shiny-verse
 docker build --progress=plain -t dipterix/rave-shiny-server -f "./docker/rave_shiny-verse.Dockerfile" "."
 
-# docker run --rm -ti --name test -e APPLICATION_LOGS_TO_STDOUT=true -p 3838:3838 rave-ieeg/shiny-verse
+# docker run --rm -ti --name test -e APPLICATION_LOGS_TO_STDOUT=true -p 3838:3838 dipterix/rave-shiny-server
 # docker exec -ti test /bin/bash
 # docker run -it -p 17283:17283 --name test rave-ieeg/shiny-verse bash
 

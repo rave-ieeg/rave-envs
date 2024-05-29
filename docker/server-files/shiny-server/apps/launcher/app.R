@@ -10,6 +10,16 @@ rave_session_root <- normalizePath(
   mustWork = FALSE
 )
 
+correct_max_workers <- function() {
+  tryCatch({
+    max_cores <- dipsaus::detectCores()
+    current_workers <- raveio::raveio_getopt("max_worker", max_cores)
+    if (current_workers > max_cores) {
+      raveio::raveio_setopt("max_worker", max_cores)
+    }
+  }, error = function(e) {})
+}
+
 list_sessions <- function() {
   if (!dir.exists(rave_session_root)) {
     return(NULL)
@@ -82,6 +92,8 @@ server <- function(input, output, session) {
   local({
     session_opts <- c("[New session]", list_sessions())
     shiny::updateSelectInput(session, "rave_session", choices = session_opts)
+
+    correct_max_workers()
   })
 
   shiny::bindEvent(
